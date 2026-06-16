@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { gentleRain, burst } from "@/lib/confetti";
 import { Bokeh } from "./Decorations";
 import type { SceneProps } from "./types";
@@ -18,7 +18,7 @@ export function Scene6Outro({
     return () => clearInterval(id);
   }, [active]);
 
-  const accept = (e: React.MouseEvent) => {
+  const accept = (e: MouseEvent) => {
     e.stopPropagation();
     setAccepted(true);
     burst();
