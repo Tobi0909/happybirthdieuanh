@@ -1,11 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Hero } from "@/components/birthday/Hero";
-import { Wish } from "@/components/birthday/Wish";
-import { FlipCards } from "@/components/birthday/FlipCards";
-import { Quiz } from "@/components/birthday/Quiz";
-import { Invite } from "@/components/birthday/Invite";
-import { Footer } from "@/components/birthday/Footer";
-import { MusicToggle } from "@/components/birthday/MusicToggle";
+import { ScenePlayer } from "@/components/scenes/ScenePlayer";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,14 +22,8 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      <Hero />
-      <Wish />
-      <FlipCards />
-      <Quiz />
-      <Invite />
-      <Footer />
-      <MusicToggle />
+    <main className="h-[100svh] w-full overflow-hidden bg-black">
+      <ScenePlayer />
     </main>
   );
 }
