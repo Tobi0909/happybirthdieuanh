@@ -163,7 +163,3 @@ function Envelope({ onRestart }: { onRestart?: () => void }) {
     </motion.div>
   );
 }
-      </div>
-    </div>
-  );
-}
