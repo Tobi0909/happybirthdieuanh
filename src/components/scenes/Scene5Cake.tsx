@@ -1,17 +1,46 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { burst, sideBurst } from "@/lib/confetti";
+import { sfx, startMicBlowDetector } from "@/lib/sfx";
 import type { SceneProps } from "./types";
 
 export function Scene5Cake({ active }: SceneProps) {
   const [blown, setBlown] = useState(false);
+  const [micState, setMicState] = useState<"idle" | "listening" | "denied">("idle");
+  const [shake, setShake] = useState(false);
 
   const blow = () => {
     if (blown) return;
     setBlown(true);
+    sfx.blow();
+    setShake(true);
+    setTimeout(() => setShake(false), 500);
     burst();
     setTimeout(() => sideBurst(), 250);
+    setTimeout(() => sfx.sparkle(), 350);
   };
+
+  useEffect(() => {
+    if (!active || blown) return;
+    let cleanup: (() => void) | null = null;
+    let cancelled = false;
+    setMicState("idle");
+    (async () => {
+      try {
+        cleanup = await startMicBlowDetector(() => {
+          if (!cancelled) blow();
+        });
+        if (!cancelled) setMicState("listening");
+      } catch {
+        if (!cancelled) setMicState("denied");
+      }
+    })();
+    return () => {
+      cancelled = true;
+      cleanup?.();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active, blown]);
 
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden px-6">
@@ -24,9 +53,16 @@ export function Scene5Cake({ active }: SceneProps) {
       >
         {blown
           ? "Điều ước đã được gửi đi rồi đó! 🌟"
-          : "Ước một điều rồi bấm để thổi nến 🌬️"}
+          : micState === "listening"
+            ? "Ước một điều rồi thổi vào mic nha 🌬️"
+            : "Ước một điều rồi bấm để thổi nến 🌬️"}
       </motion.h3>
 
+      <motion.div
+        animate={shake ? { x: [0, -10, 10, -6, 6, 0] } : { x: 0 }}
+        transition={{ duration: 0.4 }}
+        className="relative z-10"
+      >
       <motion.button
         type="button"
         onClick={(e) => {
@@ -38,10 +74,26 @@ export function Scene5Cake({ active }: SceneProps) {
         animate={active ? { y: 0, opacity: 1, scale: 1 } : {}}
         transition={{ type: "spring", stiffness: 120, damping: 14, delay: 0.2 }}
         whileTap={{ scale: 0.97 }}
-        className="relative z-10 cursor-pointer outline-none"
+        className="cursor-pointer outline-none"
       >
         <Cake blown={blown} />
       </motion.button>
+      </motion.div>
+
+      {micState === "listening" && !blown && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="absolute bottom-[15%] z-10 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-xs text-white ring-1 ring-white/30 backdrop-blur"
+        >
+          <motion.span
+            className="h-2 w-2 rounded-full bg-red-400"
+            animate={{ opacity: [0.4, 1, 0.4] }}
+            transition={{ duration: 1.2, repeat: Infinity }}
+          />
+          đang nghe... thổi đi nha 🎙️
+        </motion.div>
+      )}
 
       <AnimatePresence>
         {blown && (
