@@ -65,7 +65,16 @@ export function Scene6Outro({
             className="font-display font-medium leading-snug text-white drop-shadow-md"
             style={{ fontSize: "clamp(1.15rem, 3.6vw, 1.6rem)" }}
           >
-            Món quà sinh nhật đến đây là hết rồi...
+            Hết rồi đó em ơi 🥹
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 24 }}
+            animate={active ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 1.0, duration: 0.9, ease: softEase }}
+            className="font-display font-medium leading-snug text-white drop-shadow-md"
+            style={{ fontSize: "clamp(1.15rem, 3.6vw, 1.6rem)" }}
+          >
+            Anh không giỏi nói những câu hoa mỹ — nhưng anh biết rằng em xứng đáng được hạnh phúc mỗi ngày.
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 24 }}
@@ -74,7 +83,7 @@ export function Scene6Outro({
             className="font-display font-semibold leading-snug text-white drop-shadow-md"
             style={{ fontSize: "clamp(1.2rem, 3.8vw, 1.75rem)" }}
           >
-            Nhưng biết đâu, một câu chuyện mới lại bắt đầu từ một buổi hẹn ✨
+            Sinh nhật vui nha cô gái! 💛
           </motion.p>
         </div>
 
@@ -231,7 +240,7 @@ function Envelope({ opening }: { opening: boolean }) {
                   className="mt-5 font-display text-sm italic text-stone-500"
                   style={{ textAlign: "center" }}
                 >
-                  — from anh 🫶
+                  — from anh, người hay im lặng nhưng không phải không quan tâm 🐢
                 </motion.p>
               </motion.div>
             )}
