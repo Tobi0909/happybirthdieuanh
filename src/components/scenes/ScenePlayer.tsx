@@ -276,12 +276,13 @@ export function ScenePlayer() {
           type="button"
           onClick={(e) => {
             e.stopPropagation();
-            skip();
+            next();
           }}
-          className="pointer-events-auto rounded-full bg-white/15 px-4 py-2 text-xs font-medium text-white ring-1 ring-white/30 backdrop-blur transition hover:bg-white/25 sm:text-sm"
-          aria-label="Bỏ qua"
+          className="pointer-events-auto rounded-full bg-white/15 px-4 py-2 text-xs font-medium text-white ring-1 ring-white/30 backdrop-blur transition hover:bg-white/25 sm:text-sm disabled:opacity-40"
+          aria-label="Tiếp theo"
+          disabled={index >= total - 1}
         >
-          Bỏ qua ⏭
+          Tiếp theo →
         </button>
       </div>
 
