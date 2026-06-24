@@ -130,7 +130,6 @@ export function ScenePlayer() {
     if (index > 0) goTo(index - 1);
   }, [goTo, index]);
   const restart = useCallback(() => goTo(0), [goTo]);
-  const skip = useCallback(() => goTo(total - 1), [goTo, total]);
 
   // Auto-advance
   useEffect(() => {
