@@ -22,25 +22,25 @@ import { burst } from "@/lib/confetti";
 const SCENES = [
   {
     id: "intro",
-    durationMs: 6500,
+    durationMs: 9000,
     background:
       "radial-gradient(ellipse at 50% 55%, #1a0f2e 0%, #0a0613 60%, #050309 100%)",
   },
   {
     id: "burst",
-    durationMs: 5500,
+    durationMs: 8500,
     background:
       "linear-gradient(135deg, #FF6B9A 0%, #FFA46B 45%, #FFD86B 100%)",
   },
   {
     id: "message",
-    durationMs: 6500,
+    durationMs: 11000,
     background:
       "linear-gradient(135deg, #6BB7FF 0%, #B58CFF 50%, #FF8FB1 100%)",
   },
   {
     id: "cards",
-    durationMs: 6000,
+    durationMs: 10000,
     background:
       "linear-gradient(135deg, #88D4B5 0%, #6BB7FF 50%, #B58CFF 100%)",
   },
@@ -52,7 +52,7 @@ const SCENES = [
   },
   {
     id: "future",
-    durationMs: 7000,
+    durationMs: 10000,
     background:
       "linear-gradient(135deg, #FFB870 0%, #FF7AB6 50%, #8C6BFF 100%)",
   },
